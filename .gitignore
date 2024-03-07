@@ -2,3 +2,6 @@
 /obj
 /lib
 /bin
+/opencv
+/opencv-build
+/opencv-win
