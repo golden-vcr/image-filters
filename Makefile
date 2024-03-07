@@ -1,6 +1,9 @@
 all: ./bin/linux/imf
 
-./obj/%.o: ./src/%.cpp
+./opencv-linux/lib/libopencv_core.a:
+	./install-opencv.sh
+
+./obj/%.o: ./opencv-linux/lib/libopencv_core.a ./src/%.cpp
 	mkdir -p ./obj
 	$(CXX) -I./include -c -o $@ ./src/$(basename $(notdir $@)).cpp
 
