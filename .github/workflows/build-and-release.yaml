@@ -3,17 +3,56 @@ on: [push]
 jobs:
   build-linux:
     name: Build (Linux)
+    id: build-linux
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - name: Install OpenCV
         run: ./install-opencv.sh
+
+      - name: Build imf
+        run: make
+
+      - name: Store binaries
+        uses: actions/upload-artifact@v4
+        with:
+          - name: imf-linux
+            path: bin/linux/imf
+
   build-win:
     name: Build (Windows)
+    id: build-win
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - name: Install OpenCV
         run: install-opencv.bat
+        shell: cmd
 
+      - name: Add MSBuild to PATH
+        uses: microsoft/setup-msbuild@v2
 
+      - name: Build imf.exe
+        run: msbuild build\image-filters.sln -t:Rebuild -p:Configuration=Release
+        shell: cmd
+      
+      - name: Store binaries
+        uses: actions/upload-artifact@v4
+        with:
+          - name: imf-win
+            path: bin/win/release/imf.exe
+
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    needs: [build-linux, build-win]
+    steps:
+      - name: Retrieve binaries
+        uses: actions/download-artifact@v4
+      
+      - name: Display files
+        run: ls -R
