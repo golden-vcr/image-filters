@@ -17,14 +17,14 @@ static cv::Scalar sample_color(const cv::Mat& im, const cv::Rect& rect)
 
 static bool accept_corner(const cv::Scalar& sample, const cv::Scalar& a, const cv::Scalar& b, const cv::Scalar& c)
 {
-	static const float dist_sq_threshold = 500.0f;
+	static const double dist_sq_threshold = 500.0;
 
 	int num_similar = 0;
 	for (int i = 0; i < 3; i++)
 	{
 		const cv::Scalar& other = i == 0 ? a : (i == 1 ? b : c);
 		const cv::Scalar d = other - sample;
-		const float dist_sq = d[0] * d[0] + d[1] * d[1] + d[2] * d[2];
+		const double dist_sq = d[0] * d[0] + d[1] * d[1] + d[2] * d[2];
 		if (dist_sq < dist_sq_threshold)
 		{
 			num_similar++;
@@ -101,7 +101,7 @@ void imf_remove_background(const char* infile, const char* outfile, char* out_bg
 	// Compute the mean background color of this image, and write it to the out_bgcolor
 	// buffer (assumed to be at least 8 bytes in length) as a hex RGB value
 	const cv::Scalar bgcolor = compute_background_color(im);
-	sprintf(out_bgcolor, "#%02x%02x%02x", static_cast<int>(bgcolor[2]), static_cast<int>(bgcolor[1]), static_cast<int>(bgcolor[0]));
+	snprintf(out_bgcolor, 8, "#%02x%02x%02x", static_cast<int>(bgcolor[2]), static_cast<int>(bgcolor[1]), static_cast<int>(bgcolor[0]));
 
 	// Take an absolute difference to get the absolute value of the difference to the
 	// background color for each pixel
