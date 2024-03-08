@@ -17,8 +17,8 @@ jobs:
       - name: Store binaries
         uses: actions/upload-artifact@v4
         with:
-          - name: imf-linux
-            path: bin/linux/imf
+          name: imf-linux
+          path: bin/linux/imf
 
   build-win:
     name: Build (Windows)
