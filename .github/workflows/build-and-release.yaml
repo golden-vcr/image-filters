@@ -3,7 +3,6 @@ on: [push]
 jobs:
   build-linux:
     name: Build (Linux)
-    id: build-linux
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -23,7 +22,6 @@ jobs:
 
   build-win:
     name: Build (Windows)
-    id: build-win
     runs-on: windows-latest
     steps:
       - name: Checkout
