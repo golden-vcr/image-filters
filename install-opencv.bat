@@ -30,7 +30,10 @@ exit /b 1
 
 rem Verify that the required version of Visual Studio is installed
 set MSVS_VERSION=Visual Studio 17 2022
-set DEVENV_COM_PATH=C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\devenv.com
+set DEVENV_COM_PATH=C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\IDE\devenv.com
+if not exist "%DEVENV_COM_PATH%" (
+    set DEVENV_COM_PATH=C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\devenv.com
+)
 if exist "%DEVENV_COM_PATH%" goto devenv_installed
 echo ERROR: %MSVS_VERSION% is not installed at %DEVENV_COM_PATH%.
 echo Install it from: https://visualstudio.microsoft.com/vs/
