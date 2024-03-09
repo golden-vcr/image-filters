@@ -22,6 +22,21 @@ all: ./bin/linux/imf
 		./obj/main.o \
 		-I./include \
 		-L./lib/linux \
+		-L./opencv-linux/lib \
+		-L./opencv-linux/lib/opencv4/3rdparty \
+		-lIlmImf \
+		-lippicv \
+		-lippiw \
+		-littnotify \
+		-llibjpeg-turbo \
+		-llibopenjp2 \
+		-llibpng \
+		-llibtiff \
+		-llibwebp \
+		-lzlib \
+		-lopencv_core \
+		-lopencv_imgcodecs \
+		-lopencv_imgproc \
 		-l:image-filters.a \
 		-o $@
 
