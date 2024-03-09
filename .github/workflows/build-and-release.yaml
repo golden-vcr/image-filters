@@ -8,13 +8,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - uses: lhotari/action-upterm@v1
-
       - name: Install OpenCV
         run: ./install-opencv.sh
-
-      - name: Display files
-        run: ls -R
 
       - name: Build imf
         run: make
