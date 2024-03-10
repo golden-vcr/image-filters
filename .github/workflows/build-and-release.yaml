@@ -84,11 +84,11 @@ jobs:
     runs-on: ubuntu-latest
     needs: [build-linux, build-win]
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - name: Retrieve archives
         uses: actions/download-artifact@v4
-
-      - name: Display files
-        run: ls -R
 
       - name: Create release
         env:
