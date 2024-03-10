@@ -89,3 +89,11 @@ jobs:
 
       - name: Display files
         run: ls -R
+
+      - name: Create release
+        run: |
+          gh release create ${{ github.ref_name }} \
+            "archives-linux/$BINARY_ARCHIVE_LINUX" \
+            "archives-linux/$STATIC_LIB_ARCHIVE_LINUX" \
+            "archives-win/$BINARY_ARCHIVE_WIN" \
+            "archives-win/$STATIC_LIB_ARCHIVE_WIN"
