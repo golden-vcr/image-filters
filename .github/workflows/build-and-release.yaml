@@ -30,7 +30,7 @@ jobs:
         run: |
           zip -r "$STATIC_LIB_ARCHIVE_LINUX" include
           ln lib/linux/image-filters.a lib/image-filters.a
-          zip -u "$STATIC_LIB_ARCHIVE_LINUX" lib/linux/image-filters.a
+          zip -u "$STATIC_LIB_ARCHIVE_LINUX" lib/image-filters.a
 
       - name: Store archives
         uses: actions/upload-artifact@v4
