@@ -57,12 +57,6 @@ jobs:
       - name: Build imf.exe
         shell: cmd
         run: msbuild build\image-filters.sln -t:Rebuild -p:Configuration=Release
-      
-      - name: Store binaries
-        uses: actions/upload-artifact@v4
-        with:
-          name: imf-win
-          path: bin/win/release/imf.exe
 
       - name: Prepare binary archive
         shell: cmd
