@@ -1,10 +1,13 @@
 name: Build and Release
-on: [push]
+on:
+  push:
+    tags:
+      - 'v*'
 env:
-  BINARY_ARCHIVE_LINUX: imf_${{ github.ref }}_linux.zip
-  BINARY_ARCHIVE_WIN: imf_${{ github.ref }}_win.zip
-  STATIC_LIB_ARCHIVE_LINUX: image-filters_${{ github.ref }}_linux.zip
-  STATIC_LIB_ARCHIVE_WIN: image-filters_${{ github.ref }}_win.zip
+  BINARY_ARCHIVE_LINUX: imf_${{ github.ref_name }}_linux.zip
+  BINARY_ARCHIVE_WIN: imf_${{ github.ref_name }}_win.zip
+  STATIC_LIB_ARCHIVE_LINUX: image-filters_${{ github.ref_name }}_linux.zip
+  STATIC_LIB_ARCHIVE_WIN: image-filters_${{ github.ref_name }}_win.zip
 jobs:
   build-linux:
     name: Build (Linux)
@@ -89,3 +92,6 @@ jobs:
     steps:
       - name: Retrieve archives
         uses: actions/download-artifact@v4
+
+      - name: Display files
+        run: ls -R
