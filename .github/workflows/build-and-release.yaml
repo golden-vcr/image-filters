@@ -61,15 +61,15 @@ jobs:
       - name: Prepare binary archive
         shell: cmd
         run: |
-          7z a "$BINARY_ARCHIVE_WIN" bin\win\release\imf.exe
-          7z rn "$BINARY_ARCHIVE_WIN" bin\win\release\imf.exe imf.exe
+          7z a "%BINARY_ARCHIVE_WIN%" bin\win\release\imf.exe
+          7z rn "%BINARY_ARCHIVE_WIN%" bin\win\release\imf.exe imf.exe
 
       - name: Prepare static lib archive
         shell: cmd
         run: |
-          7z a "$STATIC_LIB_ARCHIVE_WIN" include
-          7z a "$STATIC_LIB_ARCHIVE_WIN" lib\win\release\image-filters.lib
-          7z rn "$STATIC_LIB_ARCHIVE_WIN" lib\win\release\image-filters.lib lib\image-filters.lib
+          7z a "%STATIC_LIB_ARCHIVE_WIN%" include
+          7z a "%STATIC_LIB_ARCHIVE_WIN%" lib\win\release\image-filters.lib
+          7z rn "%STATIC_LIB_ARCHIVE_WIN%" lib\win\release\image-filters.lib lib\image-filters.lib
 
       - name: Store archives
         uses: actions/upload-artifact@v4
