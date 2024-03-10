@@ -20,11 +20,11 @@ jobs:
         run: make
 
       - name: Prepare binary archive
-        run:
+        run: |
           zip -j "$BINARY_ARCHIVE_LINUX" bin/linux/imf
 
       - name: Prepare static lib archive
-        run:
+        run: |
           zip -r "$STATIC_LIB_ARCHIVE_LINUX" include
           ln lib/linux/image-filters.a lib/image-filters.a
           zip -u "$STATIC_LIB_ARCHIVE_LINUX" lib/linux/image-filters.a
@@ -45,8 +45,8 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install OpenCV
-        run: install-opencv.bat
         shell: cmd
+        run: install-opencv.bat
 
       - name: Add MSBuild to PATH
         uses: microsoft/setup-msbuild@v2
@@ -63,13 +63,13 @@ jobs:
 
       - name: Prepare binary archive
         shell: cmd
-        run:
+        run: |
           7z a "$BINARY_ARCHIVE_WIN" bin\win\release\imf.exe
           7z rn "$BINARY_ARCHIVE_WIN" bin\win\release\imf.exe imf.exe
 
       - name: Prepare static lib archive
         shell: cmd
-        run:
+        run: |
           7z a "$STATIC_LIB_ARCHIVE_WIN" include
           7z a "$STATIC_LIB_ARCHIVE_WIN" lib\win\release\image-filters.lib
           7z rn "$STATIC_LIB_ARCHIVE_WIN" lib\win\release\image-filters.lib lib\image-filters.lib
@@ -89,6 +89,3 @@ jobs:
     steps:
       - name: Retrieve archives
         uses: actions/download-artifact@v4
-
-      - name: Display files
-        run: ls -R
