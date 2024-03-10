@@ -3,6 +3,8 @@ on:
   push:
     tags:
       - 'v*'
+permissions:
+  contents: write
 env:
   BINARY_ARCHIVE_LINUX: imf_${{ github.ref_name }}_linux.zip
   BINARY_ARCHIVE_WIN: imf_${{ github.ref_name }}_win.zip
